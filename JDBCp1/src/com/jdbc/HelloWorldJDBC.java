@@ -15,7 +15,7 @@ public class HelloWorldJDBC {
 
 			Statement stmt = con.createStatement();
 
-			stmt.executeQuery("INSERT INTO TEST_EMPLOYEE VALUES(4,'Heeraj','Kooud')");
+			stmt.executeUpdate("INSERT INTO TEST_EMPLOYEE VALUES(4,'Heeraj','Kooud')");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
