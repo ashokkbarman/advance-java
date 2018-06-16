@@ -1,31 +1,38 @@
-package com.jdbc;
+package com.jdbc.dml.stmt;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DropTable {
+public class InsertDataInTable {
 
 	public static void main(String[] args) {
+
 		Connection con = null;
+		Statement stmt = null;
+
 		try {
+			// create Connection
 			con = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
-			Statement stmt = con.createStatement();
-			
-			boolean bool = stmt.execute("DROP TABLE TEST_EMPLOYEE ");
-			if(bool == false) {
-				System.out.println("Table Deleted");
+
+			// create command-statement
+			stmt = con.createStatement();
+
+			// execute command
+			int i = stmt.executeUpdate("INSERT INTO PERSON VALUES(2,'Neeraj',100.05)");
+			if (i > 0) {
+				System.out.println("Record Inserted Successfully");
 			}
-			
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 		}
