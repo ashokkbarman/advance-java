@@ -13,7 +13,7 @@ public class UpdateUserDataPrepareStmt {
 
 		try (Connection con = DriverManager.getConnection("jdbc:h2:~/test", "sa", "")) {
 
-			PreparedStatement psmt = con.prepareStatement("INSERT INTO PERSON VALUES(?,?,?)");
+			PreparedStatement psmt = con.prepareStatement("UPDATE PERSON SET NAME = ? WHERE PID = ?");
 
 			Scanner sc = new Scanner(System.in);
 			String choice = "Y";
@@ -26,18 +26,14 @@ public class UpdateUserDataPrepareStmt {
 				System.out.println("Name:");
 				String name = sc.nextLine();
 
-				System.out.println("Salary:");
-				double sal = Double.parseDouble(sc.nextLine());
-
 				// JDBC code
 
-				psmt.setInt(1, id);
-				psmt.setString(2, name);
-				psmt.setDouble(3, sal);
+				psmt.setInt(2, id);
+				psmt.setString(1, name);
 
 				int i = psmt.executeUpdate(); // No Argument
 				if (i > 0) {
-					System.out.println("Record Inserted Successfully");
+					System.out.println("Record Updated Successfully");
 				}
 
 				System.out.println("Do you want Continue:");
